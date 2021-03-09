@@ -17,7 +17,7 @@ class FoodLists extends Component{
     }
     
     componentDidMount(){
-        setTimeout(()=>{
+       setTimeout(()=>{
             this.props.getFoodItems();
             this.props.getRestaurants();
         },5000);

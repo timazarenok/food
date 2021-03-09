@@ -30,7 +30,7 @@ class Header extends Component {
                         <div>
                             <Typography variant="title" gutterBottom className="signin">
                                 <a href="/orders" style={{
-                                    display: user.id === undefined ? "none" : "auto",
+                                    display: user.name === undefined ? "none" : "auto",
                                     color: "white"
                                 }}>
                                     <FontAwesomeIcon icon="user"/>
