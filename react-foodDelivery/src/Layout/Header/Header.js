@@ -20,15 +20,21 @@ class Header extends Component {
     render()
     {
         const { anchorEl } = this.props;
+        const { user } = this.props.auth;
 
         return (
             <div>
                 <AppBar position="static" className="headerMain">
                     <Toolbar>
                         <Typography variant="title" color="inherit" className="typo"/>
-                        <div onClick={this.props.siginHandler}>
+                        <div>
                             <Typography variant="title" gutterBottom className="signin">
-                                <FontAwesomeIcon icon="user" />
+                                <a href="/orders" style={{
+                                    display: user.id === undefined ? "none" : "auto",
+                                    color: "white"
+                                }}>
+                                    <FontAwesomeIcon icon="user"/>
+                                </a>
                             </Typography>
                         </div>
                         <div  onClick={this.props.invokeBot}>
@@ -129,11 +135,12 @@ class Header extends Component {
 
 const mapStatetoProps = state => {
     return{
-        isHovered: state.isHovered,
-        anchorEl: state.anchorEl,
-        isCheckedOut: state.isCheckedOut,
-        isBotEnabled: state.isBotEnabled,
-        isOrdered: state.isOrdered,
+        isHovered: state.layout.isHovered,
+        anchorEl: state.layout.anchorEl,
+        isCheckedOut: state.layout.isCheckedOut,
+        isBotEnabled: state.layout.isBotEnabled,
+        isOrdered: state.layout.isOrdered,
+        auth: state.auth
     }
 };
 

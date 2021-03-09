@@ -148,12 +148,12 @@ class FoodList extends Component
                             <ReactPlaceholder 
                                 type='textRow' 
                                 ready={this.state.isFoodLoading}
-                                className ="showLoadingAnimation"
+                                className="showLoadingAnimation"
                                 style={styles.placeholderImage}
                                 firstLaunchOnly={true}
                                 color='#E0E0E0'
                             >
-                                <img src={this.props.image} alt="product" className ="item"/>
+                                <img src={this.props.image} alt="product" className="item"/>
                             </ReactPlaceholder>
                     }
                     <Typography 
@@ -177,7 +177,7 @@ class FoodList extends Component
                         this.state.isModalOpened? '' :
                         <ReactPlaceholder 
                             type='textRow' 
-                            className ="showLoadingAnimation"
+                            className="showLoadingAnimation"
                             ready={this.state.isFoodLoading}
                             firstLaunchOnly={true}
                             color='#E0E0E0'
@@ -197,8 +197,8 @@ class FoodList extends Component
                                         <ListItem button key={item.id} >
                                             <Radio 
                                                 color="primary"
-                                                checked = {this.state.selectedRestraunt === item.name}
-                                                onChange = {() =>this.radioSelect(item)} 
+                                                checked={this.state.selectedRestraunt === item.name}
+                                                onChange={() =>this.radioSelect(item)} 
                                                 style={styles.color}
                                                 key={item.id}
                                                 value="b"
@@ -216,13 +216,13 @@ class FoodList extends Component
                         </List>
                         <Counter 
                           quantity={this.props.quantity} 
-                          updateQuantity = {this.props.updateQuantity}
-                          clearQuantity  = {this.props.clearQuantity}
+                          updateQuantity={this.props.updateQuantity}
+                          clearQuantity={this.props.clearQuantity}
                           id={this.props.id}
-                          isRestaurantChanged = {this.state.isRestaurantChanged}
-                          isAdded = {this.props.isAdded}
+                          isRestaurantChanged={this.state.isRestaurantChanged}
+                          isAdded={this.props.isAdded}
                           price={this.state.selectedPrice}
-                          item = {this.props.item}
+                          item={this.props.item}
                         />
                         </div> : ''
                     }

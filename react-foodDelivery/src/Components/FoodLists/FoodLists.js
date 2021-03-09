@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Auxillary from '../../hoc/Auxillay';
 import Loader from '../../Components/Loader/Loader';
 import {connect} from 'react-redux';
-import * as actionCreators from '../../store/actions/actions';
+import {getFoodItems, getRestaurants} from '../../store/actions/actions';
 
 class FoodLists extends Component{
     constructor(props){
@@ -33,7 +33,7 @@ class FoodLists extends Component{
         copyLists[filteredItem].price = 0;
         
         this.setState({
-            lists:copyLists
+            lists: copyLists
         });
         this.computeSumAndTotal(this.props.lists);
     }
@@ -79,9 +79,9 @@ class FoodLists extends Component{
         const filters= this.props;
         let filteredList = this.props.lists;
         filteredList = filters.lists.filter(title =>{
-                return title.name.toLowerCase().indexOf(this.props.filteredValue.toLowerCase())!==-1
+                return title.name.toLowerCase().indexOf(this.props.filteredValue.toLowerCase()) !== -1
         });
-        const noResults =(
+        const noResults = (
             <div>
             <p>You have a unique taste!!</p>
             <img 
@@ -99,19 +99,19 @@ class FoodLists extends Component{
                 className="flexContainer">
                 {filteredList.map((item,index) => {
                     return <FoodList 
-                            image = {item.imgsrc} 
-                            name  = {item.name}
-                            price = {item.price} 
-                            key   = {index}
-                            isMostOrdered = {item.isMostOrdered}
-                            quantity      = {item.quantity}
-                            id    = {item.id}
-                            addCart = {(props)=>this.addCart(props)}
-                            updateQuantity = {this.updateQuantity}
-                            clearQuantity = {this.clearQuantity}
-                            restraunts = {this.props.restaurants}/>
+                            image={item.imgsrc} 
+                            name={item.name}
+                            price={item.price} 
+                            key={index}
+                            isMostOrdered={item.isMostOrdered}
+                            quantity={item.quantity}
+                            id={item.id}
+                            addCart={(props)=>this.addCart(props)}
+                            updateQuantity={this.updateQuantity}
+                            clearQuantity={this.clearQuantity}
+                            restraunts={this.props.restaurants}/>
                 })}
-                {((filteredList.length <=0 && this.props.filteredValue.length>0)|| this.props.error) ? noResults:''}
+                {((filteredList.length <= 0 && this.props.filteredValue.length > 0) || this.props.error) ? noResults : ''}
             </div>
             }
         </Auxillary>
@@ -120,22 +120,23 @@ class FoodLists extends Component{
 }
 
 FoodLists.propTypes ={
-    name : PropTypes.string,
-    image : PropTypes.string
+    name: PropTypes.string,
+    image: PropTypes.string
 }
 
 const mapStatetoProps = state =>{
+    console.log(state)
     return{
-    lists:state.lists,
-    error:state.error,
-    restaurants:state.restaurants
+        lists: state.layout.lists,
+        error: state.layout.error,
+        restaurants: state.layout.restaurants
     }
 }
 const mapDispatchToProps = dispatch =>{
 
     return{
-        getFoodItems: ()=> dispatch(actionCreators.getFoodItems()),
-        getRestaurants: ()=> dispatch(actionCreators.getRestaurants())
+        getFoodItems: ()=> dispatch(getFoodItems()),
+        getRestaurants: ()=> dispatch(getRestaurants())
     }
 }
 

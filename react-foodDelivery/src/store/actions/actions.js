@@ -1,75 +1,77 @@
 import axios from 'axios';
 
-export const FILTER_ITEMS = 'FILTER_ITEMS';
-export const SIGN_INPOPPED = 'SIGN_INPOPPED';
-export const HOVERED ='HOVERED';
-export const HANDLE_CLICK ='HANDLE_CLICK';
-export const CHECKED_OUT ='CHECKED_OUT';
-export const CLOSE_MODAL ='CLOSE_MODAL';
-export const INVOKE_BOT ='INVOKE_BOT';
-export const VIEW_RESTAURANTS = 'VIEW_RESTAURANTS';
-export const RADIO_SELECT  ='RADIO_SELECT';
-export const BACK = 'BACK';
-export const SET_FOODITEMS ='SET_FOODITEMS';
-export const FETCH_FOODITEMS_FAILED = 'FETCH_FOODITEMS_FAILED';
-export const SET_RESTAURANTS = 'SET_RESTAURANTS';
-export const CLEAR_QUANTITY='CLEAR_QUANTITY';
-export const ORDER_FORM ='ORDER_FORM';
-export const CLOSE_ADDRESS = 'CLOSE_ADDRESS';
+import {
+    FILTER_ITEMS,
+    SIGN_INPOPPED,
+    HOVERED,
+    HANDLE_CLICK,
+    CHECKED_OUT,
+    CLOSE_MODAL,
+    INVOKE_BOT,
+    SET_FOODITEMS,
+    FETCH_FOODITEMS_FAILED,
+    SET_RESTAURANTS,
+    ORDER_FORM,
+    CLOSE_ADDRESS
+} from './types'
 
+import {setAuthToken} from "../utility";
+import jwt_decode from "jwt-decode";
+import { SET_CURRENT_USER, USER_LOADING} from "./types";
+             
 
 export const filterItems = (filteredFood) =>{
     return{
-        type:'FILTER_ITEMS',
+        type: FILTER_ITEMS,
         filteredFood:filteredFood
     }
 }
 
 export const signIn = (isSignInPopped) =>{
     return{
-        type:'SIGN_INPOPPED',
+        type: SIGN_INPOPPED,
         isSignInPopped:isSignInPopped
     }
 }
 
 export const onHover = (isHovered) =>{
     return{
-        type:'HOVERED',
+        type: HOVERED,
         isHovered:isHovered
     }
 }
 
 export const handleClick = (anchorEl)=>{
     return{
-        type:'HANDLE_CLICK',
+        type: HANDLE_CLICK,
         anchorEl:anchorEl
     }
 }
 
 export const checkOut = (isCheckedOut)=>{
     return{
-        type:'CHECKED_OUT',
+        type: CHECKED_OUT,
         isCheckedOut:isCheckedOut,
     }
 }
 
 export const closeModal = (isCheckedOut)=>{
     return{
-        type:'CHECKED_OUT',
+        type: CLOSE_MODAL,
         isCheckedOut:isCheckedOut
     }
 }
 
 export const closeAddressModal = (isOrdered)=>{
     return{
-        type:'CLOSE_ADDRESS',
+        type: CLOSE_ADDRESS,
         isOrdered:isOrdered
     }
 }
 
 export const orderForm = (isOrdered, items)=>{
     return{
-        type:'ORDER_FORM',
+        type: ORDER_FORM,
         isCheckedOut:false,
         isOrdered:isOrdered,
         items: items
@@ -78,21 +80,21 @@ export const orderForm = (isOrdered, items)=>{
 
 export const invokeBot = (IsBotEnabled)=>{
     return{
-        type:'INVOKE_BOT',
+        type: INVOKE_BOT,
         isBotEnabled:IsBotEnabled
     }
 }
 
 export const setFoodItems =(lists)=>{
     return{
-        type:'SET_FOODITEMS',
+        type: SET_FOODITEMS,
         lists:lists
     }
 }
 
 export const fetchFoodItemsFailed = ()=>{
     return{
-        type:'FETCH_FOODITEMS_FAILED',
+        type: FETCH_FOODITEMS_FAILED,
         error:true
     }
 };
@@ -112,7 +114,7 @@ export const getFoodItems = () => {
 
 export const setRestaurants = (restaurants)=>{
     return{
-        type:'SET_RESTAURANTS',
+        type: SET_RESTAURANTS,
         restaurants:restaurants
     }
 }
@@ -131,16 +133,55 @@ export const getRestaurants = ()=>{
     }
 }
 
+export const setCurrentUser = decoded => {
+    return {
+      type: SET_CURRENT_USER,
+      payload: decoded
+    };
+  };
+  
+  // User loading
+  export const setUserLoading = () => {
+    return {
+      type: USER_LOADING
+    };
+  };
+  
 
+// Register User
+export const registerUser = (userData, history) => dispatch => {
+  axios
+    .post("http://localhost:5000/users/register", userData)
+    .then(res => history.push("/login")) // re-direct to login on successful register
+    .catch(err => console.log(err.response.data));
+};
 
+// Login - get user token
+export const loginUser = userData => dispatch => {
+  axios
+    .post("http://localhost:5000/users/login", userData)
+    .then(res => {
+      // Save to localStorage
+      // Set token to localStorage
+      const { token } = res.data;
+      localStorage.setItem("jwtToken", token);
+      // Set token to Auth header
+      setAuthToken(token);
+      // Decode token to get user data
+      const decoded = jwt_decode(token);
+      // Set current user
+      dispatch(setCurrentUser(decoded));
+    })
+    .catch(err => console.log(err.response.data));
+};
 
-
-
-
-
-
-
-
-
-
-
+// Set logged in user
+// Log user out
+export const logoutUser = () => dispatch => {
+  // Remove token from local storage
+  localStorage.removeItem("jwtToken");
+  // Remove auth header for future requests
+  setAuthToken(false);
+  // Set current user to empty object {} which will set isAuthenticated to false
+  dispatch(setCurrentUser({}));
+};

@@ -1,6 +1,11 @@
 import React from 'react';
 import './Register.css';
 
+import { withRouter } from "react-router-dom";
+import { registerUser } from "../../store/actions/actions";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
 import classnames from "classnames"
 import axios from 'axios';
 
@@ -17,20 +22,20 @@ class Register extends React.Component{
     
       componentDidMount() {
         // If logged in and user navigates to Login page, should redirect them to dashboard
-        /*if (this.props.auth.isAuthenticated) {
-          this.props.history.push("/dashboard");
-        }*/
+        if (this.props.auth.isAuthenticated) {
+          this.props.history.push("/orders");
+        }
       }
     
       componentWillReceiveProps(nextProps) {
-        /*if (nextProps.auth.isAuthenticated) {
+        if (nextProps.auth.isAuthenticated) {
           this.props.history.push("/"); // push user to dashboard when they login
         }
         if (nextProps.errors) {
           this.setState({
             errors: nextProps.errors,
           });
-        }*/
+        }
       }
     
       onChange = (e) => {
@@ -101,5 +106,15 @@ class Register extends React.Component{
     }
 }
 
-export default Register;
+Register.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+};
+const mapStateToProps = state => ({
+  auth: state.auth,
+});
+export default connect(
+  mapStateToProps,
+  { registerUser }
+)(withRouter(Register));
   

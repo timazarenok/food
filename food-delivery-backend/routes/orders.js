@@ -14,4 +14,9 @@ router.post("/create", (req, res) => {
   .catch(err => console.log(err))
 })
 
+router.get("/", (req, res) => {
+  Order.findAll().then( orders => res.json(orders))
+  .catch(err => console.log(err))
+})
+
 module.exports = router;

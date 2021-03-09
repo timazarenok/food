@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import Auxillary from '../hoc/Auxillay';
 import Header from './Header/Header';
 import FoodLists from '../Components/FoodLists/FoodLists';
-import SideDrawer from '../Components/SideDrawer/SideDrawer';
 
 import {connect} from 'react-redux';
-import * as actionCreators from  '../store/actions/actions';
+import {filterItems} from  '../store/actions/actions';
 
 class layout extends Component{
     constructor(props){
@@ -31,15 +30,15 @@ class layout extends Component{
             <Auxillary>
             <Header 
                 cartCount={this.state.cartCount} 
-                filterFood = {this.props.filterItem}
-                cartSum = {this.state.cartSum} 
+                filterFood={this.props.filterItem}
+                cartSum={this.state.cartSum} 
                 items={this.state.items}
-                siginHandler = {this.props.signinHandler}/>
+            />
             <br/>
             <h1>Популярная еда </h1>
             <FoodLists 
-                setCartTotal = {this.setCartTotal}
-                filteredValue = {this.props.filteredFood}  />
+                setCartTotal={this.setCartTotal}
+                filteredValue={this.props.filteredFood}  />
             </Auxillary>
         )
     }
@@ -47,15 +46,12 @@ class layout extends Component{
 
 const mapStatetoProps = state => {
     return{
-        isSignInPopped: state.isSignInPopped,
-        filteredFood: state.filteredFood
+        filteredFood: state.layout.filteredFood
     };
 }
 const mapDispatchToProps = dispatch => {
     return{
-        filterItem: (event) => dispatch(actionCreators.filterItems(event.target.value)),
-        signinHandler: () => dispatch(actionCreators.signIn(true)),
-        closeSignModal: () => dispatch(actionCreators.signIn(false)),
+        filterItem: (event) => dispatch(filterItems(event.target.value)),
     }
 }
 

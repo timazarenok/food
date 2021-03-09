@@ -167,7 +167,7 @@ class AddressForm extends Component
                     return <div>
                             <input 
                             type="text" 
-                            style = {(
+                            style={(
                                 (addressForm.config.touched && 
                                 addressForm.config.isInValid) ? styles.invalidInput
                                 : styles.validInput

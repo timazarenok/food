@@ -1,8 +1,11 @@
 import React from 'react';
 import './SideDrawer.css';
 
+import { connect } from "react-redux";
+import { loginUser } from "../../store/actions/actions";
 import classnames from "classnames"
 import axios from 'axios';
+import PropTypes from "prop-types";
 
 class SideDrawer extends React.Component{
     constructor() {
@@ -16,20 +19,20 @@ class SideDrawer extends React.Component{
     
       componentDidMount() {
         // If logged in and user navigates to Login page, should redirect them to dashboard
-        /*if (this.props.auth.isAuthenticated) {
-          this.props.history.push("/dashboard");
-        }*/
+        if (this.props.auth.isAuthenticated) {
+          this.props.history.push("/orders");
+        }
       }
     
       componentWillReceiveProps(nextProps) {
-        /*if (nextProps.auth.isAuthenticated) {
+        if (nextProps.auth.isAuthenticated) {
           this.props.history.push("/"); // push user to dashboard when they login
         }
         if (nextProps.errors) {
           this.setState({
             errors: nextProps.errors,
           });
-        }*/
+        }
       }
     
       onChange = (e) => {
@@ -45,14 +48,14 @@ class SideDrawer extends React.Component{
         axios.post("http://localhost:5000/users/login", userData)
         .then(() => this.props.history.push("/"))
         .catch(err => console.log(err))
-        console.log(userData) // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
+        this.props.loginUser(userData) // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
       };
 
     render()
     {
         const { errors } = this.state;
 
-        let loginForm =(
+        let loginForm = (
             <form onSubmit={this.onSubmit}>
                 <input
                   onChange={this.onChange}
@@ -92,7 +95,7 @@ class SideDrawer extends React.Component{
                 <h2>Логин</h2>
                 <div className="loginBlock">
                 {
-                    loginForm
+                  loginForm
                 }
                 </div>  
             </div>
@@ -100,5 +103,13 @@ class SideDrawer extends React.Component{
     }
 }
 
-export default SideDrawer;
+SideDrawer.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+};
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+export default connect(mapStateToProps, { loginUser })(SideDrawer);
+
   
