@@ -1,0 +1,39 @@
+.parentDiv{
+  position: relative;
+  top: 0;
+  height: 100%;
+  background: #fff;
+  padding:9.5%;
+  width: 25%;
+  margin: auto;
+}
+
+
+.parentDiv input[type="text"] {
+  width: 90%;
+  padding: 15px;
+  margin-bottom: 11px;
+}
+
+.parentDiv input[type="password"] {
+  width: 90%;
+  padding: 15px;
+  margin-bottom: 11px;
+}
+
+.submit-button {
+  width: 150px;
+  height: 30px;
+  border: none;
+  background-color: blue;
+  color: white;
+  border-radius: 25px;
+}
+
+
+@media (max-width:680px){
+  .parentDiv{
+      padding: 10%;
+      width:80%;
+  }
+}

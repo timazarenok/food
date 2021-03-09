@@ -16,18 +16,12 @@ const { User } = require("../models");
 // @access Public
 router.post("/register", (req, res) => {
   // Form validation
-  const { errors, isValid } = validateRegisterInput(req.body);
-  // Check validation
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
-  User.findOne({ where: { email: req.body.email }}).then((user) => {
+  User.findOne({ where: { userName: req.body.userName }}).then((user) => {
     if (user) {
-      return res.status(400).json({ email: "Email already exists" });
+      return res.status(400).json({ userName: "userName already exists" });
     } else {
       User.create({
-        name: req.body.name,
-        email: req.body.email,
+        userName: req.body.userName,
         password: req.body.password,
       }).then((user) => res.json(user))
         .catch((err) => console.log(err));
@@ -40,19 +34,13 @@ router.post("/register", (req, res) => {
 // @access Public
 router.post("/login", (req, res) => {
   // Form validation
-  const { errors, isValid } = validateLoginInput(req.body);
-  // Check validation
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
-  const email = req.body.email;
+  const userName = req.body.userName;
   const password = req.body.password;
   // Find user by email
-  User.findOne({ where: {email: email }}).then((user) => {
-    console.log(user)
+  User.findOne({ where: { userName: userName }}).then((user) => {
     // Check if user exists
     if (!user) {
-      return res.status(404).json({ emailnotfound: "Email not found" });
+      return res.status(404).json({ emailnotfound: "userName not found" });
     }
     // Check password
     bcrypt.compare(password, user.password).then((isMatch) => {

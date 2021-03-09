@@ -1,0 +1,4 @@
+Чтобы запустить программу:
+1. Папка с backendom -> bash console -> npm i -> node index.js
+2. Папка с frontom -> bash console -> npm i -> npm audit fix (если потребует) -> npm start
+git remote add origin https://github.com/timazarenok/food.git3. Создание базы -> mysql workbench -> зайти в пользователя -> написать в файле "create database food;" -> запустить файл

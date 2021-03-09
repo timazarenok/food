@@ -1,10 +1,6 @@
 module.exports = (Sequelize, sequelize) => 
   sequelize.define("user", {
-    name: {
-      type: Sequelize.STRING,
-      required: true
-    },
-    email: {
+    userName: {
       type: Sequelize.STRING,
       required: true
     },

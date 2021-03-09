@@ -1,10 +1,11 @@
 import React from 'react';
-import './SideDrawer.css';
+import './Register.css';
 
 import classnames from "classnames"
 import axios from 'axios';
 
-class SideDrawer extends React.Component{
+
+class Register extends React.Component{
     constructor() {
         super();
         this.state = {
@@ -42,7 +43,7 @@ class SideDrawer extends React.Component{
           userName: this.state.userName,
           password: this.state.password,
         };
-        axios.post("http://localhost:5000/users/login", userData)
+        axios.post("http://localhost:5000/users/register", userData)
         .then(() => this.props.history.push("/"))
         .catch(err => console.log(err))
         console.log(userData) // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
@@ -89,10 +90,10 @@ class SideDrawer extends React.Component{
         );
         return(
             <div className="parentDiv">
-                <h2>Логин</h2>
+                <h2>Регистрация</h2>
                 <div className="loginBlock">
                 {
-                    loginForm
+                  loginForm
                 }
                 </div>  
             </div>
@@ -100,5 +101,5 @@ class SideDrawer extends React.Component{
     }
 }
 
-export default SideDrawer;
+export default Register;
   

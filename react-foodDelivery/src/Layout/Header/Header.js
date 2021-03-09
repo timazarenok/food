@@ -74,12 +74,12 @@ class Header extends Component {
                                         onClick={this.props.handleClose} 
                                         className="menusItem"
                                     >
-                                        Total Items : {this.props.cartCount}
+                                        Количество : {this.props.cartCount}
                                     </MenuItem>
                                     <MenuItem 
                                         onClick={this.props.handleClose} 
                                         className="menusItem">
-                                        Total Price : {this.props.cartSum}
+                                        Итог : {this.props.cartSum}
                                     </MenuItem>
                                     <br/>
                                     <MenuItem 
@@ -87,7 +87,7 @@ class Header extends Component {
                                         <Button 
                                         color="primary"
                                         className="btn">
-                                            Order
+                                            Заказ
                                         </Button>
                                     </MenuItem>
                                 </div> :

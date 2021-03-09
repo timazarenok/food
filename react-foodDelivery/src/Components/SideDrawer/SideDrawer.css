@@ -1,19 +1,11 @@
 .parentDiv{
-    position: fixed;
+    position: relative;
     top: 0;
     height: 100%;
     background: #fff;
-    transition: -webkit-transform .3s ease-out;
-    transition: transform .3s ease-out;
-    transition: transform .3s ease-out,-webkit-transform .3s ease-out;
-    z-index: 200;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    left: auto;
-    right: 0px;
-    transform: translate(0%, 0px);
     padding:9.5%;
-    width:33%;
+    width: 25%;
+    margin: auto;
 }
 
 
@@ -27,6 +19,15 @@
     width: 90%;
     padding: 15px;
     margin-bottom: 11px;
+}
+
+.submit-button {
+    width: 150px;
+    height: 30px;
+    border: none;
+    background-color: blue;
+    color: white;
+    border-radius: 25px;
 }
 
 

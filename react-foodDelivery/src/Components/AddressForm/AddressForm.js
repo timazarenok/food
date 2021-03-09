@@ -42,7 +42,7 @@ class AddressForm extends Component
                     elementType:'input',
                     elementConfig:{
                         type:'text',
-                        placeholder:'Your Name'
+                        placeholder:'Имя'
                     },
                     value:'',
                     isInValid:true,
@@ -55,7 +55,7 @@ class AddressForm extends Component
                     elementType:'input',
                     elementConfig:{
                         type:'text',
-                        placeholder:'Your address'
+                        placeholder:'Адрес'
                     },
                     value:'',
                     isInValid:true,
@@ -68,7 +68,7 @@ class AddressForm extends Component
                     elementType:'input',
                     elementConfig:{
                         type:'number',
-                        placeholder:'Your pincode'
+                        placeholder:'Индекс'
                     },
                     value:'',
                     isInValid:true,
@@ -81,7 +81,7 @@ class AddressForm extends Component
                     elementType:'input',
                     elementConfig:{
                         type:'number',
-                        placeholder:'Your phonenumber'
+                        placeholder:'Номер телефона'
                     },
                     value:'',
                     isInValid:true,
@@ -147,7 +147,7 @@ class AddressForm extends Component
         axios.post('http://localhost:5000/orders/create', obj)
         .then(() => console.log("here"))
         .catch((err) => {
-            console.log("Error in Order!" + err);
+            console.log("Ошибка в Заказе!" + err);
         });
     }
     
@@ -182,7 +182,7 @@ class AddressForm extends Component
                     onClick={this.submitAddress}
                     style={(this.state.isInvalidAddressForm? styles.btnDisable:
                       styles.btnColor)}
-                    disabled={this.state.isInvalidAddressForm}>Submit</Button>
+                    disabled={this.state.isInvalidAddressForm}>Отправить</Button>
             </form>
         );
         return(
@@ -190,7 +190,7 @@ class AddressForm extends Component
             <Backdrop clicked={this.props.modalClose}/>
             <br/><br/>
             <div className="parentAddress">
-            <h2>Address</h2>
+            <h2>Адресные данные</h2>
             <FontAwesomeIcon icon="times" style={styles.close} onClick={this.props.modalClose}/>
             <br/>
                { addressArray.length > 0 ? addressForm : null }

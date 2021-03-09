@@ -24,15 +24,15 @@ const modal = (props) => (
   <Auxillay>
     <Backdrop clicked={props.modalClose}/>
     <div className="parentModal">
-      <p  className="summary"> Summary</p>
+      <p  className="summary"> Сумма</p>
       <FontAwesomeIcon icon="times" className="closeIcon" onClick={props.modalClose}/>
       <Table className="table">
         <TableHead>
           <TableRow>
             <TableCell/>
-            <TableCell className="bigDevices">Item</TableCell>
-            <TableCell numeric>Quantity</TableCell>
-            <TableCell numeric>Price</TableCell>
+            <TableCell className="bigDevices">Товар</TableCell>
+            <TableCell numeric>Количество</TableCell>
+            <TableCell numeric>Цена</TableCell>
           </TableRow>
         </TableHead>
           <TableBody>
@@ -53,7 +53,7 @@ const modal = (props) => (
             }
             <TableRow>
               <TableCell/>
-              <TableCell component="th" scope="row" className="bigDevices"><b>Total</b></TableCell>
+              <TableCell component="th" scope="row" className="bigDevices"><b>Итог</b></TableCell>
               <TableCell numeric><b>{props.totalItems}</b></TableCell>
               <TableCell numeric><b>{props.totalPrice}/-</b></TableCell>
             </TableRow>
@@ -67,7 +67,7 @@ const modal = (props) => (
         style={styles.btnColor}
         onClick={props.orderForm}
       >
-        Checkout
+        Отправить
       </Button>
     </div>
   </Auxillay>

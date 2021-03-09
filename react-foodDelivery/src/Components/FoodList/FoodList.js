@@ -139,7 +139,7 @@ class FoodList extends Component
                             firstLaunchOnly={true} 
                             ready={this.state.isFoodLoading} 
                             color='#E0E0E0'>
-                            <Typography component="p" className="mostOrdered">Popular</Typography>
+                            <Typography component="p" className="mostOrdered">Популярная</Typography>
                         </ReactPlaceholder> : <div style={styles.itemNotMostOrdered}/>
                     }
                     <br/>
@@ -170,7 +170,7 @@ class FoodList extends Component
                         component="p" 
                         style={styles.italian}
                     >
-                        Italian
+                        Итальянская
                     </Typography>
                     <br/>
                     {
@@ -183,7 +183,7 @@ class FoodList extends Component
                             color='#E0E0E0'
                         >
                             <Button variant="outlined" color="primary" style={styles.color} onClick={()=> this.viewRestraunts(this.props.name)}>
-                                Restaurants
+                                Рестораны
                             </Button>
                         </ReactPlaceholder>
                     }

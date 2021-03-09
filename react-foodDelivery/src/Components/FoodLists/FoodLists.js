@@ -49,7 +49,7 @@ class FoodLists extends Component{
             lists:copyLists
         });
         this.computeSumAndTotal(this.props.lists);
-        return 'success';
+        return 'Успешно';
     }
 
     computeSumAndTotal =(state)=>{
@@ -71,7 +71,7 @@ class FoodLists extends Component{
                 return i.quantity > 0
             });
             this.props.setCartTotal(totalCart,totalSum,finalItems);
-            return 'success';
+            return 'Успешно';
     }
 
     render()

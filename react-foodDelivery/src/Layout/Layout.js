@@ -29,11 +29,6 @@ class layout extends Component{
     {
         return (
             <Auxillary>
-            {
-                this.props.isSignInPopped ?
-                <SideDrawer closeSignModal = {this.props.closeSignModal}/> 
-                : '' 
-            }
             <Header 
                 cartCount={this.state.cartCount} 
                 filterFood = {this.props.filterItem}
@@ -41,7 +36,7 @@ class layout extends Component{
                 items={this.state.items}
                 siginHandler = {this.props.signinHandler}/>
             <br/>
-            <h1>Popular Food </h1>
+            <h1>Популярная еда </h1>
             <FoodLists 
                 setCartTotal = {this.setCartTotal}
                 filteredValue = {this.props.filteredFood}  />
